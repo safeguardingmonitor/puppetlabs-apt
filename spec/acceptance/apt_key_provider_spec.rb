@@ -13,7 +13,7 @@ CENTOS_GPG_KEY_FILE            = 'RPM-GPG-KEY-CentOS-6'
 
 SHOULD_NEVER_EXIST_ID          = 'EF8D349F'
 
-KEY_CHECK_COMMAND              = "apt-key adv --list-keys --with-colons --fingerprint | grep "
+KEY_CHECK_COMMAND              = "apt-key adv --no-tty --list-keys --with-colons --fingerprint | grep "
 PUPPETLABS_KEY_CHECK_COMMAND   = "#{KEY_CHECK_COMMAND} #{PUPPETLABS_GPG_KEY_FINGERPRINT}"
 CENTOS_KEY_CHECK_COMMAND       = "#{KEY_CHECK_COMMAND} #{CENTOS_GPG_KEY_FINGERPRINT}"
 
@@ -91,7 +91,7 @@ describe 'apt_key' do
 
         # Install the key first (retry because key pool may timeout)
         retry_on_error_matching(MAX_TIMEOUT_RETRY, TIMEOUT_RETRY_WAIT, TIMEOUT_ERROR_MATCHER) do
-          shell("apt-key adv --keyserver hkps.pool.sks-keyservers.net \
+          shell("apt-key adv --no-tty --keyserver hkps.pool.sks-keyservers.net \
               --recv-keys #{CENTOS_GPG_KEY_FINGERPRINT}")
         end
         shell(CENTOS_KEY_CHECK_COMMAND)
@@ -105,7 +105,7 @@ describe 'apt_key' do
 
         # Re-Install the key (retry because key pool may timeout)
         retry_on_error_matching(MAX_TIMEOUT_RETRY, TIMEOUT_RETRY_WAIT, TIMEOUT_ERROR_MATCHER) do
-          shell("apt-key adv --keyserver hkps.pool.sks-keyservers.net \
+          shell("apt-key adv --no-tty --keyserver hkps.pool.sks-keyservers.net \
                 --recv-keys #{CENTOS_GPG_KEY_FINGERPRINT}")
         end
       end
@@ -122,7 +122,7 @@ describe 'apt_key' do
 
         # Install the key first (retry because key pool may timeout)
         retry_on_error_matching(MAX_TIMEOUT_RETRY, TIMEOUT_RETRY_WAIT, TIMEOUT_ERROR_MATCHER) do
-          shell("apt-key adv --keyserver hkps.pool.sks-keyservers.net \
+          shell("apt-key adv --no-tty --keyserver hkps.pool.sks-keyservers.net \
                 --recv-keys #{PUPPETLABS_GPG_KEY_LONG_ID}")
         end
 
