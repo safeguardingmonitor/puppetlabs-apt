@@ -13,7 +13,7 @@ CENTOS_GPG_KEY_FILE            = 'RPM-GPG-KEY-CentOS-6'.freeze
 
 SHOULD_NEVER_EXIST_ID          = 'EF8D349F'.freeze
 
-KEY_CHECK_COMMAND              = 'apt-key adv --list-keys --with-colons --fingerprint | grep '.freeze
+KEY_CHECK_COMMAND              = 'apt-key adv --no-tty --list-keys --with-colons --fingerprint | grep '.freeze
 PUPPETLABS_KEY_CHECK_COMMAND   = "#{KEY_CHECK_COMMAND} #{PUPPETLABS_GPG_KEY_FINGERPRINT}".freeze
 CENTOS_KEY_CHECK_COMMAND       = "#{KEY_CHECK_COMMAND} #{CENTOS_GPG_KEY_FINGERPRINT}".freeze
 
